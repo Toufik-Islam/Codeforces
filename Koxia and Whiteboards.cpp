@@ -5,6 +5,7 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    cout.tie(0);
 
     int t;
     cin>>t;
@@ -12,29 +13,28 @@ int main()
     {
         int x,y;
         cin>>x>>y;
-        vector<int> A;
-        vector<int> B;
-        A.resize(x);
-        B.resize(y);
-        long long int sum=0;
-        for(int i=0;i<x;i++)
-            cin>>A[i];
-        for(int i=0;i<y;i++)
-            cin>>B[i];
+        list<int> A;
+        long long sum=0;
 
-        sort(A.begin(),A.end());
-        sort(B.begin(),B.end(),greater <int>());
+        for(int i=0; i<x; i++)
+        {
+            int in;
+            cin >> in;
+            sum+=in;
+            A.push_front(in);
+        }
 
-        for(int i=0;i<y;i++)
-            swap(A[i],B[i]);
+        while(y--)
+        {
+            A.sort();
+            int i;
+            cin >> i;
+            sum=sum + i - A.front();
+            A.pop_front();
+            A.push_front(i);
+        }
 
-        for(int i=0;i<x;i++)
-            sum+=A[i];
-
-        cout<<sum<<"\n";
-
+        cout << sum << "\n";
     }
-
-
     return 0;
 }
